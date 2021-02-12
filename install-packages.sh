@@ -10,7 +10,6 @@ set -euo pipefail
 # feedback:
 export DEBIAN_FRONTEND=noninteractive
 
-APACHE="2.4.46"
 NAGIOS="4.4.6"
 
 # Update the package listing, so we know what package exist:
@@ -20,21 +19,11 @@ apt-get update
 apt-get -y upgrade
 
 # Install a new package, without unnecessary recommended packages:
-apt-get -y install --no-install-recommends autoconf gcc make libapr1-dev libaprutil1-dev libpcre3-dev wget unzip php ca-certificates
+apt-get -y install --no-install-recommends apt-get install -y autoconf gcc libc6 make wget unzip apache2 apache2-utils php libgd-dev ca-certificates
 
 # Delete cached files we don't need anymore:
 apt-get clean
 rm -rf /var/lib/apt/lists/*
-
-# Download Apache httpd from the official repo.
-cd /tmp
-wget https://downloads.apache.org//httpd/httpd-$APACHE.tar.gz
-tar -xvf httpd-$APACHE.tar.gz
-cd /tmp/httpd-$APACHE
-./configure --prefix=/usr/local/apache2
-make
-make install
-mkdir /etc/apache2/sites-enabled
 
 # Download and compile Nagios-core from the official repo.
 cd /tmp
