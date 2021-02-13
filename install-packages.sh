@@ -52,7 +52,7 @@ usermod -a -G nagios www-data
 make install
 
 # This installs the service or daemon files and also configures them to start on boot.
-# make install-daemoninit
+make install-daemoninit
 
 # This installs and configures the external command file.
 make install-commandmode
