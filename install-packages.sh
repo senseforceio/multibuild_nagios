@@ -31,16 +31,16 @@ cd /tmp
 wget https://downloads.apache.org//httpd/httpd-$APACHE.tar.gz
 tar -xvf httpd-$APACHE.tar.gz
 cd /tmp/httpd-$APACHE
-./configure --prefix=/usr/local/apache2
+./configure --prefix=/usr/local/apache2 --enable-mods-shared=all
 make
 make install
-mkdir /etc/apache2/sites-enabled
 
 # Download and compile Nagios-core from the official repo.
 cd /tmp
 wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-$NAGIOS.tar.gz
 tar -xvf nagios-$NAGIOS.tar.gz
 cd /tmp/nagios-$NAGIOS
+mkdir /etc/apache2/sites-enabled
 ./configure --with-httpd-conf=/etc/apache2/sites-enabled
 make all
 
@@ -62,5 +62,5 @@ make install-config
 
 # This installs the Apache web server configuration files and configures the Apache settings.
 make install-webconf
-a2enmod rewrite
-a2enmod cgi
+#a2enmod rewrite
+#a2enmod cgi
