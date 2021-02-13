@@ -6,10 +6,23 @@
 # details.
 set -euo pipefail
 
+APACHE="2.4.46"
 NAGIOS="4.4.6"
 
-swupd update
-swupd bundle-add c-basic wget httpd
+# Add dependencies required to build Nagios
+RUN apk update && \
+	    apk add --no-cache build-base automake libtool autoconf py-docutils gnutls  \
+	                            gnutls-dev g++ make alpine-sdk build-base gcc autoconf \
+				                            gettext-dev linux-headers openssl-dev
+
+# Download Apache httpd from the official repo.
+cd /tmp
+wget https://downloads.apache.org//httpd/httpd-$APACHE.tar.gz
+tar -xvf httpd-$APACHE.tar.gz
+cd /tmp/httpd-$APACHE
+./configure --prefix=/usr/local/apache2 --enable-mods-shared=all
+make
+make install
 
 # Download and compile Nagios-core from the official repo.
 cd /tmp
