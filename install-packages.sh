@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Bash "strict mode", to help catch problems and bugs in the shell
 # script. Every bash script you write should include this. See
@@ -10,10 +10,10 @@ APACHE="2.4.46"
 NAGIOS="4.4.6"
 
 # Add dependencies required to build Nagios
-RUN apk update && \
-	    apk add --no-cache build-base automake libtool autoconf py-docutils gnutls  \
-	                            gnutls-dev g++ make alpine-sdk build-base gcc autoconf \
-				                            gettext-dev linux-headers openssl-dev
+apk update && \
+apk add --no-cache build-base automake libtool autoconf py-docutils gnutls  \
+gnutls-dev g++ make alpine-sdk build-base gcc autoconf \
+gettext-dev linux-headers openssl-dev
 
 # Download Apache httpd from the official repo.
 cd /tmp
