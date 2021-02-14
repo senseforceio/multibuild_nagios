@@ -33,7 +33,7 @@ cd /tmp
 wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
 tar -xvf nginx-$NGINX_VERSION.tar.gz
 cd nginx-$NGINX_VERSION
-configure --prefix=$NGINX_PREFIX
+./configure --prefix=$NGINX_PREFIX
 make
 make install
 
@@ -43,7 +43,7 @@ cd /tmp
 wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-$NAGIOS_VERSION.tar.gz
 tar -xvf nagios-$NAGIOS_VERSION.tar.gz
 cd nagios-$NAGIOS_VERSION
-configure --prefix=$NAGIOS_PREFIX
+./configure --prefix=$NAGIOS_PREFIX
 make all
 
 # This creates the nagios user and group. The www-data user is also added to the nagios group.
