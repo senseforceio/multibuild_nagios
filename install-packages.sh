@@ -42,17 +42,3 @@ make install-config
 make install-webconf
 #a2enmod rewrite
 #a2enmod cgi
-
-sed -i 's/^#LoadModule mpm_prefork_module modules\/mod_mpm_prefork\.so/LoadModule mpm_prefork_module modules\/mod_mpm_prefork\.so/g' /etc/httpd/conf/httpd.conf
-sed -i 's/DirectoryIndex index.html/DirectoryIndex index.php index.html index.htm AddType application\/x-httpd-php .phpAddType application\/x-httpd-php-source .phps/g' /etc/httpd/conf/httpd.conf
-sed -i 's/#LoadModule cgid_module/LoadModule cgid_module/g' /etc/httpd/conf/httpd.conf
-sed -i 's/#LoadModule cgi_module/LoadModule cgi_module/g' /etc/httpd/conf/httpd.conf
-echo 'LoadModule php7_module modules/libphp7.so' >> /etc/httpd/conf/httpd.conf
-echo 'Include "conf/extra/nagios.conf"' >> /etc/httpd/conf/httpd.conf
-echo 'Include "conf/extra/php7_module.conf"' >> /etc/httpd/conf/httpd.conf
-printf '\n<FilesMatch ".php$">\n' >> /etc/httpd/conf/httpd.conf
-printf '\tSetHandler application/x-httpd-php\n' >> /etc/httpd/conf/httpd.conf
-printf '</FilesMatch>\n' >> /etc/httpd/conf/httpd.conf
-printf '<FilesMatch ".phps$">\n' >> /etc/httpd/conf/httpd.conf
-printf '\tSetHandler application/x-httpd-php-source\n' >> /etc/httpd/conf/httpd.conf
-printf '</FilesMatch>\n' >> /etc/httpd/conf/httpd.conf
