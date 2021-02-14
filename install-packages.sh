@@ -10,7 +10,8 @@ set -euo pipefail
 # feedback:
 export DEBIAN_FRONTEND=noninteractive
 
-NAGIOS="4.4.6"
+NAGIOS_VERSION="4.4.6"
+LIGHTTPD_VERSION="1.4.59"
 
 # Update the package listing, so we know what package exist:
 apt-get update
@@ -19,18 +20,28 @@ apt-get update
 apt-get -y upgrade
 
 # Install a new package, without unnecessary recommended packages:
-apt-get -y install --no-install-recommends lighttpd autoconf gcc libc6 make wget ca-certificates unzip php libgd-dev
+apt-get -y install --no-install-recommends autoconf gcc libc6 make wget ca-certificates unzip php libgd-dev libpcre3-dev
 
 # Delete cached files we don't need anymore:
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
+# Download and compile Lighttpd from the officical repo.
+cd /tmp
+wget https://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-$LIGHTTPD_VERSION.tar.gz
+tar -xvf lighttpd-$LIGHTTPD_VERSION.tar.gz
+cd /tmp/lighttpd-$LIGHTTPD_VERSION
+./configure --prefix=/usr/local/lighttpd
+make all
+make install
+
+
 # Download and compile Nagios-core from the official repo.
 cd /tmp
-wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-$NAGIOS.tar.gz
-tar -xvf nagios-$NAGIOS.tar.gz
-cd /tmp/nagios-$NAGIOS
-./configure
+wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-$NAGIOS_VERSION.tar.gz
+tar -xvf nagios-$NAGIOS_VERSION.tar.gz
+cd /tmp/nagios-$NAGIOS_VERSION
+./configure --prefix=/usr/local/nagios
 make all
 
 # This creates the nagios user and group. The www-data user is also added to the nagios group.
@@ -41,7 +52,7 @@ make install-groups-users
 make install
 
 # This installs the service or daemon files and also configures them to start on boot.
-make install-init
+# make install-init
 
 # This installs and configures the external command file.
 make install-commandmode
