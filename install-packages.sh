@@ -31,7 +31,7 @@ cd /tmp
 wget https://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-$LIGHTTPD_VERSION.tar.gz
 tar -xvf lighttpd-$LIGHTTPD_VERSION.tar.gz
 cd /tmp/lighttpd-$LIGHTTPD_VERSION
-./configure --prefix=/usr/local/lighttpd
+./configure --prefix="/usr/local/lighttpd"
 make all
 make install
 
@@ -41,7 +41,7 @@ cd /tmp
 wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-$NAGIOS_VERSION.tar.gz
 tar -xvf nagios-$NAGIOS_VERSION.tar.gz
 cd /tmp/nagios-$NAGIOS_VERSION
-./configure --prefix=/usr/local/nagios
+./configure --prefix="/usr/local/nagios"
 make all
 
 # This creates the nagios user and group. The www-data user is also added to the nagios group.
