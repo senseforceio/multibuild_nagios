@@ -4,7 +4,7 @@ COPY install-packages.sh .
 RUN ./install-packages.sh
 
 # Multi-stage build
-FROM docker pull phusion/baseimage:master-amd64
+FROM phusion/baseimage:master-amd64
 
 # Copy Apache
 COPY --from=builder /usr/lib/apache2 /usr/lib/apache2
