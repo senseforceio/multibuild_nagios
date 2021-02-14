@@ -67,7 +67,7 @@ cd /tmp
 wget https://github.com/nagios-plugins/nagios-plugins/releases/download/release-$PLUGINS/nagios-plugins-$PLUGINS.tar.gz
 tar -xvf nagios-plugins-$PLUGINS.tar.gz
 cd ./nagios-plugins-$PLUGINS
-./tools/setup
+#./tools/setup
 ./configure
 make
 make install

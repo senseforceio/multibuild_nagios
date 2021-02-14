@@ -30,8 +30,13 @@ COPY --from=builder /usr/sbin /usr/sbin
 # Copy Nagios
 COPY --from=builder /usr/local/nagios /usr/local/nagios
 
-# Copy system
+# Copy system etc
 COPY --from=builder /etc /etc
+
+# Copy awk, need for plugins
+COPY --from=builder /usr/bin/awk /usr/bin/awk
+COPY --from=builder /usr/lib/x86_64-linux-gnu/libsigsegv.so.2 /usr/lib/x86_64-linux-gnu/libsigsegv.so.2
+COPY --from=builder /usr/lib/x86_64-linux-gnu/libmpfr.so.6 /usr/lib/x86_64-linux-gnu/libmpfr.so.6
 
 COPY start.sh /start.sh
 CMD /start.sh
