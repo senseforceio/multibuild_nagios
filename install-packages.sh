@@ -31,7 +31,6 @@ cd /tmp
 wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-$NAGIOS.tar.gz
 tar -xvf nagios-$NAGIOS.tar.gz
 cd /tmp/nagios-$NAGIOS
-mkdir /etc/apache2/sites-enabled
 ./configure --with-httpd-conf="/etc/apache2/sites-enabled"
 make all
 
@@ -55,3 +54,6 @@ make install-config
 make install-webconf
 a2enmod rewrite
 a2enmod cgi
+
+# Create nagiosadmin user with default password "nagios".
+htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagios
