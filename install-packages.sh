@@ -22,7 +22,7 @@ apt-get update
 apt-get -y upgrade
 
 # Install a new package, without unnecessary recommended packages:
-apt-get -y install --no-install-recommends vim-tiny procps autoconf gcc libc6 make wget ca-certificates unzip php libgd-dev
+apt-get -y install --no-install-recommends vim-tiny procps autoconf gcc libc6 make wget ca-certificates unzip php libgd-dev libpcre3-dev
 
 # Delete cached files we don't need anymore:
 apt-get clean
@@ -33,17 +33,16 @@ cd /tmp
 wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
 tar -xvf nginx-$NGINX_VERSION.tar.gz
 cd nginx-$NGINX_VERSION
-./configure --prefix=$NGINX_PREFIX
+./configure
 make
 make install
-
 
 # Download and compile newest stable nagios-core from the official repo.
 cd /tmp
 wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-$NAGIOS_VERSION.tar.gz
 tar -xvf nagios-$NAGIOS_VERSION.tar.gz
 cd nagios-$NAGIOS_VERSION
-./configure --prefix=$NAGIOS_PREFIX
+./configure
 make all
 
 # This creates the nagios user and group. The www-data user is also added to the nagios group.
@@ -61,3 +60,5 @@ make install-commandmode
 
 # This installs the *SAMPLE* configuration files. These are required as Nagios needs some configuration files to allow it to start.
 make install-config
+
+rm -rf /tmp/nginx-$NGINX_VERSION /tmp/nagios-$NAGIOS_VERSION
