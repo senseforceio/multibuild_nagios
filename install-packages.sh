@@ -11,7 +11,9 @@ set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 
 NAGIOS_VERSION="4.4.6"
-LIGHTTPD_VERSION="1.4.59"
+NGINX_VERSION="1.18.0"
+NAGIOS_PREFIX="/usr/local/nagios"
+NGINX_PREFIX="/usr/local/nginx"
 
 # Update the package listing, so we know what package exist:
 apt-get update
@@ -20,28 +22,28 @@ apt-get update
 apt-get -y upgrade
 
 # Install a new package, without unnecessary recommended packages:
-apt-get -y install --no-install-recommends autoconf gcc libc6 make wget ca-certificates unzip php libgd-dev libpcre3-dev
+apt-get -y install --no-install-recommends vim-tiny procps autoconf gcc libc6 make wget ca-certificates unzip php libgd-dev
 
 # Delete cached files we don't need anymore:
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
-# Download and compile Lighttpd from the officical repo.
+# Download and compile newest stable nginx from the officical repo.
 cd /tmp
-wget https://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-$LIGHTTPD_VERSION.tar.gz
-tar -xvf lighttpd-$LIGHTTPD_VERSION.tar.gz
-cd /tmp/lighttpd-$LIGHTTPD_VERSION
-./configure --prefix=/usr/local/lighttpd
-make all
+wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
+tar -xvf nginx-$NGINX_VERSION.tar.gz
+cd nginx-$NGINX_VERSION
+configure --prefix=$NGINX_PREFIX
+make
 make install
 
 
-# Download and compile Nagios-core from the official repo.
+# Download and compile newest stable nagios-core from the official repo.
 cd /tmp
 wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-$NAGIOS_VERSION.tar.gz
 tar -xvf nagios-$NAGIOS_VERSION.tar.gz
-cd /tmp/nagios-$NAGIOS_VERSION
-./configure --prefix=/usr/local/nagios
+cd nagios-$NAGIOS_VERSION
+configure --prefix=$NAGIOS_PREFIX
 make all
 
 # This creates the nagios user and group. The www-data user is also added to the nagios group.
