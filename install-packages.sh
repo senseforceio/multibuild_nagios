@@ -61,4 +61,4 @@ make install-commandmode
 # This installs the *SAMPLE* configuration files. These are required as Nagios needs some configuration files to allow it to start.
 make install-config
 
-rm -rf /tmp/nginx-$NGINX_VERSION /tmp/nagios-$NAGIOS_VERSION
+rm -rf /tmp/*
