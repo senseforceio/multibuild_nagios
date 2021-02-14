@@ -19,7 +19,7 @@ apt-get update
 apt-get -y upgrade
 
 # Install new packages for nagios install
-apt-get install -y autoconf bc gawk dc build-essential gcc libc6 make wget unzip apache2 php libapache2-mod-php libgd-dev libmcrypt-dev make libssl-dev snmp libnet-snmp-perl gettext
+apt-get install --no-install-recommends -y autoconf gcc libc6 make wget unzip apache2 php libapache2-mod-php7.4 libgd-dev ca-certificates
 
 # Delete cached files we don't need anymore:
 apt-get clean
@@ -57,6 +57,6 @@ a2enmod cgi
 htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagios
 
 # Install plugins
-apt-get install -y monitoring-plugins nagios-nrpe-plugin
-mkdir -p /usr/local/nagios/etc/servers
+# apt-get install -y monitoring-plugins nagios-nrpe-plugin
+# mkdir -p /usr/local/nagios/etc/servers
 
