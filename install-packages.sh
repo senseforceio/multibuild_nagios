@@ -11,7 +11,6 @@ set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 
 NAGIOS="4.4.6"
-PLUGINS="2.3.3"
 
 # Update the package listing, so we know what package exist:
 apt-get update
@@ -20,15 +19,10 @@ apt-get update
 apt-get -y upgrade
 
 # Install new packages for nagios install
-apt-get install -y autoconf gcc libc6 make wget unzip apache2 apache2-utils php libgd-dev ca-certificates
-
-# Install new packages for plugins install
-apt-get install -y libmcrypt-dev bc gawk dc build-essential snmp libnet-snmp-perl gettext
+apt-get install -y autoconf bc gawk dc build-essential gcc libc6 make wget unzip apache2 php libapache2-mod-php libgd-dev libmcrypt-dev make libssl-dev snmp libnet-snmp-perl gettext
 
 # Delete cached files we don't need anymore:
 apt-get clean
-rm -rf /var/lib/apt/lists/*
-
 
 # Download and compile Nagios-core from the official repo.
 cd /tmp
@@ -63,11 +57,6 @@ a2enmod cgi
 htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagios
 
 # Install plugins
-cd /tmp
-wget https://github.com/nagios-plugins/nagios-plugins/releases/download/release-$PLUGINS/nagios-plugins-$PLUGINS.tar.gz
-tar -xvf nagios-plugins-$PLUGINS.tar.gz
-cd ./nagios-plugins-$PLUGINS
-#./tools/setup
-./configure
-make
-make install
+apt-get install -y monitoring-plugins nagios-nrpe-plugin
+mkdir -p /usr/local/nagios/etc/servers
+
