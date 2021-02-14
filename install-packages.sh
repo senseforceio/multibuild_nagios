@@ -20,7 +20,7 @@ apt-get update
 apt-get -y upgrade
 
 # Install a new package, without unnecessary recommended packages:
-apt-get -y install --no-install-recommends autoconf gcc libc6 make wget ca-certificates unzip php libgd-dev libpcre3-dev
+apt-get -y install --no-install-recommends vim-tiny procps autoconf gcc libc6 make wget ca-certificates unzip php libgd-dev libpcre3-dev
 
 # Delete cached files we don't need anymore:
 apt-get clean
