@@ -19,7 +19,7 @@ apt-get update
 apt-get -y upgrade
 
 # Install a new package, without unnecessary recommended packages:
-apt-get install -y autoconf gcc libc6 make wget unzip apache2 apache2-utils php libgd-dev ca-certificates
+apt-get install -y multitail autoconf gcc libc6 make wget unzip apache2 apache2-utils php libgd-dev ca-certificates
 
 # Delete cached files we don't need anymore:
 apt-get clean
