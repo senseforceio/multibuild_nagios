@@ -49,5 +49,5 @@ COPY --from=builder /usr/sbin /usr/sbin
 
 RUN chown -R nagios:nagios /var/lib/nagios && chown -R nagios:www-data /var/lib/nagios4
 
-#COPY start.sh /start.sh
-#CMD /start.sh
+COPY start.sh /start.sh
+CMD /start.sh
