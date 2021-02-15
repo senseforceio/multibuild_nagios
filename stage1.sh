@@ -56,7 +56,7 @@ a2enmod cgi
 htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagios
 
 # Install packages for compile plugins
-apt-get install -y autoconf gcc libc6 libmcrypt-dev make libssl-dev wget bc gawk dc build-essential snmp libnet-snmp-perl gettext iputils-*
+apt-get install -y autoconf gcc libc6 libmcrypt-dev make libssl-dev wget bc gawk dc build-essential snmp libnet-snmp-perl gettext iputils-ping
 
 # Download Nagios plugins
 cd /tmp
