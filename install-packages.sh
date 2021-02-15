@@ -56,4 +56,4 @@ a2enmod rewrite
 a2enmod cgi
 
 # Creating nagiosdmin user with default password
-sudo htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagios
+htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagios
