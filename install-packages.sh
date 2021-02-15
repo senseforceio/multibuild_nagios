@@ -62,11 +62,11 @@ apt-get install -y autoconf gcc libc6 libmcrypt-dev make libssl-dev wget bc gawk
 cd /tmp
 wget http://www.nagios-plugins.org/download/nagios-plugins-$PLUGINS.tar.gz
 tar -xvf nagios-plugins-$PLUGINS.tar.gz
-cd ./nagios-plugins-release-$PLUGINS
+cd ./nagios-plugins-$PLUGINS
 ./configure
 make
 make install
-rm -rf ./nagios-plugins-release-$PLUGINS
+rm -rf ./nagios-plugins-$PLUGINS
 
 # Delete cached files we don't need anymore:
 apt-get clean
