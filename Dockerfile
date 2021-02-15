@@ -47,5 +47,7 @@ COPY --from=builder /lib/x86_64-linux-gnu /lib/x86_64-linux-gnu
 COPY --from=builder /etc /etc
 COPY --from=builder /usr/sbin /usr/sbin
 
+RUN chown -R nagios:nagios /var/lib/nagios && chown -R nagios:www-data /var/lib/nagios4
+
 #COPY start.sh /start.sh
 #CMD /start.sh
