@@ -17,7 +17,7 @@ apt-get update
 apt-get -y upgrade
 
 # Install new packages for nagios install
-apt-get install -y apt-get install wget apt-transport-https ca-certificates
+apt-get install -y wget apt-transport-https ca-certificates
 
 echo "deb https://repo.nagios.com/deb/$(lsb_release -cs) /" > /etc/apt/sources.list.d/nagios.list
 
