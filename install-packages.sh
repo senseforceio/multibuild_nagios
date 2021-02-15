@@ -19,7 +19,7 @@ apt-get -y upgrade
 # Install new packages for nagios install
 apt-get install -y wget apt-transport-https ca-certificates gnupg2
 
-echo "deb https://repo.nagios.com/deb/buster /" > /etc/apt/sources.list.d/nagios.list
+echo "deb https://repo.nagios.com/deb/focal /" > /etc/apt/sources.list.d/nagios.list
 
 # Add our public GPG key
 wget -qO - https://repo.nagios.com/GPG-KEY-NAGIOS-V2 | apt-key add -
