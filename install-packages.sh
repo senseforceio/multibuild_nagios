@@ -19,7 +19,7 @@ apt-get update
 apt-get -y upgrade
 
 # Install a new package, without unnecessary recommended packages:
-apt-get install -y --no-install-recommends autoconf gcc libc6 make wget unzip apache2 apache2-utils php libgd-dev libaprutil1 ca-certificates
+apt-get install -y autoconf gcc libc6 make wget unzip apache2 php libapache2-mod-php7.4 libgd-devi ca-certificates
 
 # Delete cached files we don't need anymore:
 apt-get clean
@@ -29,9 +29,10 @@ rm -rf /var/lib/apt/lists/*
 cd /tmp
 wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-$NAGIOS.tar.gz
 tar -xvf nagios-$NAGIOS.tar.gz
-cd /tmp/nagios-$NAGIOS
+cd ./nagios-$NAGIOS
 ./configure --with-httpd-conf=/etc/apache2/sites-enabled
 make all
+rm -rf ./nagios-$NAGIOS 
 
 # This creates the nagios user and group. The www-data user is also added to the nagios group.
 make install-groups-users
@@ -41,7 +42,7 @@ usermod -a -G nagios www-data
 make install
 
 # This installs the service or daemon files and also configures them to start on boot.
-# make install-daemoninit
+make install-init
 
 # This installs and configures the external command file.
 make install-commandmode
@@ -53,3 +54,6 @@ make install-config
 make install-webconf
 a2enmod rewrite
 a2enmod cgi
+
+# Creating nagiosdmin user with default password
+sudo htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagios
