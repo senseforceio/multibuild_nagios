@@ -21,7 +21,7 @@ apt-get update
 apt-get -y upgrade
 
 # Install packages for compile nagios:
-apt-get install -y autoconf gcc libc6 make wget unzip apache2 php libapache2-mod-php7.4 libgd-dev ca-certificates
+apt-get install -y autoconf gcc libc6 make wget unzip apache2 apache2-utils php libgd-dev ca-certificates
 
 # Download and compile Nagios-source
 cd /tmp
