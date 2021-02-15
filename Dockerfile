@@ -11,3 +11,6 @@ RUN ./stage2.sh
 
 COPY --from=builder /etc /etc
 COPY --from=builder /usr/local/nagios /usr/local/nagios
+
+COPY start.sh .
+CMD ./start.sh
