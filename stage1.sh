@@ -12,6 +12,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 NAGIOS="4.4.6"
 PLUGINS="2.3.3"
+NRPE="4.0.2"
 
 # Update the package listing, so we know what package exist:
 apt-get update
@@ -29,7 +30,6 @@ tar -xvf nagios-$NAGIOS.tar.gz
 cd ./nagios-$NAGIOS
 ./configure --with-httpd-conf=/etc/apache2/sites-enabled
 make all
-rm -rf ./nagios-$NAGIOS 
 
 # This creates the nagios user and group. The www-data user is also added to the nagios group.
 make install-groups-users
@@ -66,7 +66,17 @@ cd ./nagios-plugins-$PLUGINS
 ./configure
 make
 make install
-rm -rf ./nagios-plugins-$PLUGINS
+
+# Download NRPE plugin
+cd /tmp
+wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-$NRPE/nrpe-$NRPE.tar.gz
+tar -xvf nrpe-$NRPE.tar.gz
+cd ./nrpe-$NRPE
+./configure --with-init-type=sysv # sysv if there is /etc/init.d (Debian/Ubuntu official containers)
+make all
+make install
+make install-init
+make install-config
 
 # Delete cached files we don't need anymore:
 apt-get clean
