@@ -2,4 +2,4 @@
 
 service nagios start
 service apache2 start
-tail -f /usr/local/nagios/var/nagios.log
+tail -f /var/log/apache2/error.log

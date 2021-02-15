@@ -33,5 +33,5 @@ COPY --from=builder /var/log/nagios4 /var/log/nagios4
 # Copy system etc
 COPY --from=builder /etc /etc
 
-COPY start.sh /start.sh
-CMD /start.sh
+#COPY start.sh /start.sh
+#CMD /start.sh
