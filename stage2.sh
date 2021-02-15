@@ -13,6 +13,6 @@ export DEBIAN_FRONTEND=noninteractive
 # Install Apache from repo
 apt-get update
 apt-get -y upgrade 
-apt-get install -y apache2 apache2-utils php gawk
+apt-get install -y apache2 apache2-utils php gawk coreutils
 apt-get clean
 rm -rf /var/lib/apt/lists/*
