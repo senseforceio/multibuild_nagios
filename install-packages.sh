@@ -32,6 +32,7 @@ apt-get install -y --no-install-recommends nagios4 apache2
 a2enmod auth_digest
 a2enmod authz_groupfile
 
-# Delete cached files we don't need anymore:
+# Delete files we don't need:
 apt-get clean
 rm -rf /var/lib/apt/lists/*
+find / -type d | grep -v nagios | grep doc | xargs rm -rf
