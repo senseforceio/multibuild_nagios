@@ -1,10 +1,10 @@
-FROM debian:stable-slim AS builder
+FROM ubuntu:20.04 AS builder
 
 COPY install-packages.sh .
 RUN ./install-packages.sh
 
 # Multi-stage build
-FROM debian:stable-slim
+FROM ubuntu:20.04
 
 # Copy Apache2
 COPY --from=builder /usr/lib/apache2 /usr/lib/apache2
