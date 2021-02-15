@@ -16,3 +16,4 @@ apt-get -y upgrade
 apt-get install -y apache2 php libapache2-mod-php7.4 gawk
 apt-get clean
 rm -rf /var/lib/apt/lists/*
+rm $0

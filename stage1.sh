@@ -71,3 +71,4 @@ rm -rf ./nagios-plugins-$PLUGINS
 # Delete cached files we don't need anymore:
 apt-get clean
 rm -rf /var/lib/apt/lists/*
+rm $0
