@@ -28,7 +28,9 @@ wget -qO - https://repo.nagios.com/GPG-KEY-NAGIOS-V2 | apt-key add -
 apt-get update
 
 # Install Nagios4
-apt-get install -y --no-install-recommends nagios4
+apt-get install -y --no-install-recommends nagios4 apache2
+a2enmod auth_digest
+a2enmod authz_groupfile
 
 # Delete cached files we don't need anymore:
 apt-get clean
