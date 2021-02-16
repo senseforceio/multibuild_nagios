@@ -13,6 +13,9 @@ export DEBIAN_FRONTEND=noninteractive
 PLUGINS="2.3.3"
 NRPE="4.0.2"
 
+# Install packages for compile plugins
+apt-get install -y autoconf gcc libc6 libmcrypt-dev make libssl-dev wget bc gawk dc build-essential snmp libnet-snmp-perl gettext iputils-ping
+
 # Download Nagios plugins
 cd /tmp
 wget http://www.nagios-plugins.org/download/nagios-plugins-$PLUGINS.tar.gz
