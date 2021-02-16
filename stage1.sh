@@ -11,8 +11,6 @@ set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 
 NAGIOS="4.4.6"
-PLUGINS="2.3.3"
-NRPE="4.0.2"
 
 # Update the package listing, so we know what package exist:
 apt-get update
@@ -54,29 +52,6 @@ a2enmod cgi
 
 # Creating nagiosdmin user with default password
 htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagios
-
-# Install packages for compile plugins
-apt-get install -y autoconf gcc libc6 libmcrypt-dev make libssl-dev wget bc gawk dc build-essential snmp libnet-snmp-perl gettext iputils-ping
-
-# Download Nagios plugins
-cd /tmp
-wget http://www.nagios-plugins.org/download/nagios-plugins-$PLUGINS.tar.gz
-tar -xvf nagios-plugins-$PLUGINS.tar.gz
-cd ./nagios-plugins-$PLUGINS
-./configure
-make
-make install
-
-# Download NRPE plugin
-cd /tmp
-wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-$NRPE/nrpe-$NRPE.tar.gz
-tar -xvf nrpe-$NRPE.tar.gz
-cd ./nrpe-$NRPE
-./configure --enable-command-args --with-ssl-lib=/usr/lib/x86_64-linux-gnu/ --with-init-type=sysv # sysv if there is /etc/init.d (Debian/Ubuntu official containers)
-make install-groups-users
-make all
-make install
-make install-init
 
 # Delete cached files we don't need anymore:
 apt-get clean

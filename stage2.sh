@@ -10,9 +10,29 @@ set -euo pipefail
 # feedback:
 export DEBIAN_FRONTEND=noninteractive
 
-# Install Apache from repo
-apt-get update
-apt-get -y upgrade 
-apt-get install -y apache2 php libapache2-mod-php7.4 gawk iproute2 iputils-*
+PLUGINS="2.3.3"
+NRPE="4.0.2"
+
+# Download Nagios plugins
+cd /tmp
+wget http://www.nagios-plugins.org/download/nagios-plugins-$PLUGINS.tar.gz
+tar -xvf nagios-plugins-$PLUGINS.tar.gz
+cd ./nagios-plugins-$PLUGINS
+./configure
+make
+make install
+
+# Download NRPE plugin
+cd /tmp
+wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-$NRPE/nrpe-$NRPE.tar.gz
+tar -xvf nrpe-$NRPE.tar.gz
+cd ./nrpe-$NRPE
+./configure --enable-command-args --with-ssl-lib=/usr/lib/x86_64-linux-gnu/ --with-init-type=sysv # sysv if there is /etc/init.d (Debian/Ubuntu official containers)
+make install-groups-users
+make all
+make install
+make install-init
+
+# Delete cached files we don't need anymore:
 apt-get clean
 rm -rf /var/lib/apt/lists/*
