@@ -16,3 +16,6 @@ COPY stage3.sh .
 RUN ./stage3.sh
 COPY --from=plugin-builder /usr/local/nagios /usr/local/nagios
 COPY --from=plugin-builder /etc /etc
+
+COPY start.sh .
+CMD ./start.sh
