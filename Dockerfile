@@ -10,7 +10,7 @@ COPY stage2.sh .
 RUN ./stage2.sh
 
 
-FROM ubuntu:20:04 
+FROM ubuntu:20.04 
 
 COPY stage3.sh .
 RUN ./stage3.sh
