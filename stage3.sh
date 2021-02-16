@@ -12,7 +12,11 @@ export DEBIAN_FRONTEND=noninteractive
 
 # Install Apache from repo
 apt-get update
+
+
 apt-get -y upgrade 
 apt-get install -y apache2 php libapache2-mod-php7.4 gawk iproute2 iputils-*
+
+
 apt-get clean
 rm -rf /var/lib/apt/lists/*
