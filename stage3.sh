@@ -15,7 +15,7 @@ apt-get update
 
 
 apt-get -y upgrade 
-apt-get install -y apache2 php libapache2-mod-php7.4 gawk iproute2 iputils-*
+apt-get install -y apache2 php libapache2-mod-php7.4 gawk iproute2 iputils-* vim
 
 
 apt-get clean
