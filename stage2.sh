@@ -36,6 +36,7 @@ make install-groups-users
 make all
 make install
 make install-init
+make install-config
 
 # Delete cached files we don't need anymore:
 apt-get clean
