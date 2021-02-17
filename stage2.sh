@@ -31,7 +31,8 @@ cd /tmp
 wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-$NRPE/nrpe-$NRPE.tar.gz
 tar -xvf nrpe-$NRPE.tar.gz
 cd ./nrpe-$NRPE
-./configure --enable-command-args --with-ssl-lib=/usr/lib/x86_64-linux-gnu/ --with-init-type=sysv # sysv if there is /etc/init.d (Debian/Ubuntu official containers)
+export LDFLAGS="-static"
+./configure --enable-command-args --disable-ssl --with-init-type=sysv # sysv if there is /etc/init.d (Debian/Ubuntu official containers)
 make install-groups-users
 make all
 make install
